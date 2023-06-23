@@ -1,0 +1,42 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Alura-Ceep",
+    "dateExported": "2023-06-23T16:58:33.107Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "c9e3dd4e-68f0-44a3-8b91-8734a4963347",
+            "colId": "8a14f214-383f-4465-a9e7-ff4e4120e13b",
+            "containerId": "",
+            "name": "Post",
+            "url": "http://localhost:8080/notas",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-06-23T16:19:45.151Z",
+            "modified": "2023-06-23T16:20:32.916Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\r\n    \"titulo\" : \"test 1\",\r\n    \"descricao\" : \"test 2\",\r\n    \"imagem\" : \"https://images.pexels.com/photos/3862132/pexels-photo-3862132.jpeg\"\r\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "ed6f3e98-7266-4474-827c-12a8ebfad6c6",
+            "colId": "8a14f214-383f-4465-a9e7-ff4e4120e13b",
+            "containerId": "",
+            "name": "GetAll",
+            "url": "http://localhost:8080/notas",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-06-23T16:20:49.826Z",
+            "modified": "2023-06-23T16:20:56.677Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}

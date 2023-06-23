@@ -2,6 +2,8 @@ package br.com.alura.ceep.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.telecom.Call
+import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.app.AppCompatActivity
@@ -11,10 +13,18 @@ import androidx.lifecycle.repeatOnLifecycle
 import br.com.alura.ceep.database.AppDatabase
 import br.com.alura.ceep.databinding.ActivityListaNotasBinding
 import br.com.alura.ceep.extensions.vaiPara
+import br.com.alura.ceep.model.Nota
 import br.com.alura.ceep.ui.recyclerview.adapter.ListaNotasAdapter
+import br.com.alura.ceep.webclient.RetrofitInicializador
+import br.com.alura.ceep.webclient.model.NotaResposta
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.Response
+import kotlin.math.log
 
 class ListaNotasActivity : AppCompatActivity() {
+    private val TAG = "ListaNotas"
 
     private val binding by lazy {
         ActivityListaNotasBinding.inflate(layoutInflater)
@@ -34,6 +44,16 @@ class ListaNotasActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 buscaNotas()
+            }
+        }
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                val call = RetrofitInicializador().notaService.buscaTodas()
+                val resposta: Response<List<NotaResposta>> = call.execute()
+                resposta.body()?.let { notasReposta ->
+                    val notas: List<Nota> = notasReposta.map { it.nota }
+                    Log.i(TAG, "onCreate: $notas")
+                }
             }
         }
     }
